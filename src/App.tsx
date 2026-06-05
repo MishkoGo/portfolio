@@ -40,9 +40,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const nextHash = `#${activeView}`;
-    if (window.location.hash !== nextHash) {
-      window.history.pushState({}, "", nextHash);
+    const nextUrl =
+      activeView === "home"
+        ? `${window.location.pathname}${window.location.search}`
+        : `${window.location.pathname}${window.location.search}#${activeView}`;
+
+    if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== nextUrl) {
+      window.history.pushState({}, "", nextUrl);
     }
   }, [activeView]);
 
